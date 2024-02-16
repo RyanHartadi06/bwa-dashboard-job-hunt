@@ -30,10 +30,13 @@ import InputSkills from "@/components/organisms/InputSkills";
 import CKEditor from "@/components/organisms/CKEditor";
 import InputBenefits from "@/components/organisms/InputBenefits/DialogAddBenefit";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface PostJobPageProps {}
 
 const PostJobPage: FC<PostJobPageProps> = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof jobFormSchema>>({
     resolver: zodResolver(jobFormSchema),
     defaultValues: {
@@ -52,10 +55,13 @@ const PostJobPage: FC<PostJobPageProps> = () => {
   }, []);
   return (
     <div>
-      <div className="inline-flex items-center gap-2 cursor-pointer hover:text-primary">
+      <Link
+        className="inline-flex items-center gap-2 cursor-pointer hover:text-primary"
+        href="/"
+      >
         <ArrowLeftIcon className="w-7 h-7" />{" "}
         <span className="text-2xl font-semibold">Post a Job</span>
-      </div>
+      </Link>
       <div className="my-5">
         <div className="text-lg font-semibold">Basic Information</div>
         <div className="text-gray-400">

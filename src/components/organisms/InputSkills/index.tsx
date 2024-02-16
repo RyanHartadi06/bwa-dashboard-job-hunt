@@ -21,7 +21,7 @@ interface InputSkillsProps {
 }
 
 const InputSkills: FC<InputSkillsProps> = ({ form }) => {
-  const [isHide, setHide] = useState<boolean>(true);
+  const [isHide, setHide] = useState<boolean>(false);
   const [values, setValues] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,7 +39,6 @@ const InputSkills: FC<InputSkillsProps> = ({ form }) => {
 
   const handleDeleteValue = (item: string) => {
     const skills: any = values.filter((value: string) => item !== value);
-
     setValues(skills);
     form.setValue("requiredSkills", skills);
   };

@@ -27,9 +27,12 @@ const Sidebar: FC<SidebarProps> = () => {
             <Button
               variant={"ghost"}
               className="w-full justify-start rounded-none hover:text-primary"
+              onClick={() => {
+                router.push("/");
+              }}
             >
               <AiOutlineHome className="mr-2 text-lg" />
-              <Link href="/">Home</Link>
+              Home
             </Button>
             <Button
               variant={"ghost"}
@@ -55,6 +58,9 @@ const Sidebar: FC<SidebarProps> = () => {
             <Button
               variant={"ghost"}
               className="w-full justify-start rounded-none hover:text-primary"
+              onClick={() => {
+                router.push("/job-listings");
+              }}
             >
               <HiOutlineClipboardList className="mr-2 text-lg" />
               Job Listing
