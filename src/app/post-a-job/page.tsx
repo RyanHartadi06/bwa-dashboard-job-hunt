@@ -6,7 +6,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Separator } from "@/components/ui/separator";
-import FieldInput from "@/components/organism/FieldInput";
+import FieldInput from "@/components/organisms/FieldInput";
 import {
   Form,
   FormControl,
@@ -26,8 +26,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import InputSkills from "@/components/organism/InputSkills";
-import CKEditor from "@/components/organism/CKEditor";
+import InputSkills from "@/components/organisms/InputSkills";
+import CKEditor from "@/components/organisms/CKEditor";
+import InputBenefits from "@/components/organisms/InputBenefits/DialogAddBenefit";
+import { Button } from "@/components/ui/button";
 
 interface PostJobPageProps {}
 
@@ -207,12 +209,12 @@ const PostJobPage: FC<PostJobPageProps> = () => {
           </FieldInput>
           <Separator />
           <FieldInput
-            title="Job Descriptions"
-            subtitle="Job titles must be describe one position"
+            title="Responsibilities"
+            subtitle="Outline the core responsibilities of the position. Make sure your list of responsibilities is detailed but concise"
           >
             <CKEditor
               form={form}
-              name="jobDescription"
+              name="responsibility"
               editorLoaded={editorLoaded}
             />
           </FieldInput>
@@ -234,11 +236,21 @@ const PostJobPage: FC<PostJobPageProps> = () => {
           >
             <CKEditor
               form={form}
-              name="niceToHave"
+              name="niceToHaves"
               editorLoaded={editorLoaded}
             />
           </FieldInput>
           <Separator />
+          <FieldInput
+            title="Perks and Benefits"
+            subtitle="Encourage more people to apply by sharing the attractive rewards and benefits you offer your employees"
+          >
+            <InputBenefits form={form} />
+          </FieldInput>
+          <Separator />
+          <div className="justify-end flex">
+            <Button>Do Review</Button>
+          </div>
         </form>
       </Form>
     </div>

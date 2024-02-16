@@ -31,7 +31,7 @@ const CKEditor: FC<CKEditorProps> = ({ form, name, editorLoaded }) => {
           />
           <FormField
             control={form.control}
-            name="roles"
+            name={name}
             render={({ field }) => (
               <FormItem>
                 <FormMessage className="mt-3" />
