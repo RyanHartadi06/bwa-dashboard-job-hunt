@@ -31,12 +31,10 @@ import CKEditor from "@/components/organisms/CKEditor";
 import InputBenefits from "@/components/organisms/InputBenefits/DialogAddBenefit";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 interface PostJobPageProps {}
 
 const PostJobPage: FC<PostJobPageProps> = () => {
-  const router = useRouter();
   const form = useForm<z.infer<typeof jobFormSchema>>({
     resolver: zodResolver(jobFormSchema),
     defaultValues: {
@@ -204,14 +202,18 @@ const PostJobPage: FC<PostJobPageProps> = () => {
             title="Required Skills"
             subtitle="Add required skills for the job"
           >
-            <InputSkills form={form} />
+            <InputSkills form={form} name="requiredSkills" label="Add Skill" />
           </FieldInput>
           <Separator />
           <FieldInput
             title="Job Descriptions"
             subtitle="Job titles must be describe one position"
           >
-            <InputSkills form={form} />
+            <CKEditor
+              form={form}
+              name="jobDescription"
+              editorLoaded={editorLoaded}
+            />
           </FieldInput>
           <Separator />
           <FieldInput
