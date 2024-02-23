@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import { signUpFormSchema } from "@/lib/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -25,9 +26,38 @@ const SignUpPage: FC<SignUpPageProps> = () => {
   });
 
   const router = useRouter();
+  const { toast } = useToast();
 
-  const onSubmit = (val: z.infer<typeof signUpFormSchema>) => {
-    console.log(val);
+  const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {
+    try {
+      const response: any = await fetch("/api/company/new-user", {
+        method: "POST",
+        body: JSON.stringify(val),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("RESPONSE : ", response);
+      if (response.status === "error") {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Email already exists",
+        });
+        return;
+      }
+      toast({
+        title: "Success",
+        description: "Account created successfully",
+      });
+      router.push("/sign-in");
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Something went wrong",
+      });
+    }
   };
   return (
     <div className="relative w-full h-screen">
